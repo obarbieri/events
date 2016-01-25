@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Responsive Calendar Widget that will make your day</title>
+    <meta name="distributor" content="Global" />
+    <meta itemprop="contentRating" content="General" />
+    <meta name="robots" content="All" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="description" content="The source of truly unique and awesome jquery plugins." />
+    <meta name="keywords" content="slider, carousel, responsive, swipe, one to one movement, touch devices, jquery, plugin, bootstrap compatible, html5, css3" />
+    <meta name="author" content="w3widgets.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JQuery -->
+    <script src="js/jquery-2.2.0.js"></script>
+	
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Responsive slider -->
+    <link href="css/calendar/responsive-calendar.css" rel="stylesheet">
+    <link href="css/calendar/badge.css" rel="stylesheet">
+    <script src="js/calendar/responsive-calendar.js"></script>
+
+    <!-- Date picker -->	    
+	<link rel="stylesheet" href="css/datepicker/bootstrap-datepicker.min.css" />
+	<link rel="stylesheet" href="css/datepicker/bootstrap-datepicker3.min.css" />
+	<script src="js/datepicker/bootstrap-datepicker.min.js"></script>
+     
+  </head>
+  <body>
+    <div class="container">
+    
+    	<h1>Calendar <span>Basic Usage</span></h1>
+
+    	<hr>
+
+    	<p>The calendar needs <a href="http://jquery.com/" target="_blank">jQuery</a>, and
+        	<a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap</a> to function properly.
+        	After including these libraries the plugin can be used by requiring the javascript and stylesheet file.
+        	Then view the calendar by defining a DOM-element and initializing the plugin.</p>
+
+    	<hr>
+
+    	<div class="row">
+    		<div class="col-sm-8">
+		<form id="dateRangeForm" method="post" class="form-horizontal">  
+			<a href="javascript:void(0)" class="btn btn-info btn" onclick="thisDate('all');" rel="all"><span>All Events</span></a> 
+			<a href="javascript:void(0)" class=" btn btn-success" onclick="thisDate('week');" rel="week"><span>This Week</span></a> 
+			<a href="javascript:void(0)" class=" btn btn-success" onclick="thisDate('weekend');" rel="weekend"><span>This Weekend</span></a>
+			<label class="input-append date"><span>Pick Date:</span></label> 
+			<input placeholder="Start Date" class="input-sm" type="text" size="15" value="" id="jform_start" name="start_date" autocomplete="off" /> 
+			<input placeholder="End Date" class="input-sm" type="text" size="15" value="" id="jform_end" name="end_date" style="display: inline;" autocomplete="off" /> 
+    		<script type="text/javascript">
+    			$(document).ready(function() {
+    		    	$('#jform_start')
+    		        .datepicker({
+    		            format: 'yyyy/mm/dd',
+    		            startDate: '2010/01/01',
+    		            endDate: '2030/12/31'
+    		        }),
+    		    	$('#jform_end')
+    		        .datepicker({
+    		            format: 'yyyy/mm/dd',
+    		            startDate: '2010/01/01',
+    		            endDate: '2030/12/31'
+    		        })
+
+    		    });
+    	    </script>
+			<button class="btn btn-info" id="inp-pick-go" name="pick-go" type="button" onclick="checkPickDate();">Go</button> 
+    	</form>	
+    		</div>
+        	<div class="col-sm-4">
+
+      			<!-- Responsive calendar - START -->
+    			<div class="responsive-calendar">
+        			<div class="controls">
+            			<a class="pull-left" data-go="prev"><div class="btn btn-primary">Prev</div></a>
+            			<h4><span data-head-year></span> <span data-head-month></span></h4>
+            			<a class="pull-right" data-go="next"><div class="btn btn-primary">Next</div></a>
+        			</div><hr/>
+        			<div class="day-headers">
+          				<div class="day header">Mon</div>
+          				<div class="day header">Tue</div>
+          				<div class="day header">Wed</div>
+          				<div class="day header">Thu</div>
+          				<div class="day header">Fri</div>
+          				<div class="day header">Sat</div>
+          				<div class="day header">Sun</div>
+        			</div>
+        			<div class="days" data-group="days">          
+        			</div>
+      			</div>
+      			<!-- Responsive calendar - END -->
+				<!-- Placeholder -->
+  				<div class="responsive-calendar-placeholder">      			
+    			</div>
+			</div>
+		</div>
+	</div>
+
+
+
+    <script type="text/javascript">    
+    	var jsonEvents = '{"2016-01-11":{"badgeClass":"badge-warning","number":2,"url":"http://www.google.com","dayEvents":[{"name":"Important meeting","hour":"17:30"},{"name":"Morning meeting at coffee house","hour":"08:15"}]},"2016-01-13":{"badgeClass":"badge-warning","number":3,"url":"http://www.google.com","dayEvents":[{"name":"Scrum","hour":"09:00"},{"name":"Conference call","hour":"10:00"},{"name":"5@7","hour":"17:00"}]},"2016-01-25":{"badgeClass":"badge-warning","number":1,"url":"http://www.google.com","dayEvents":[{"name":"Tennis","hour":"20:00"}]},"2016-02-01":{"badgeClass":"badge-warning","number":1,"url":"http://www.google.com","dayEvents":[{"name":"Scrum","hour":"09:00"}]}}';
+    	
+    	function mouseIsOver(what){
+        	var temp = $(what).parent().find(":hover");
+        	return temp.length == 1;
+    	}
+    
+    	function zero(num) {
+    		if (num < 10) { return "0" + num; }
+        	else { return "" + num; }
+   		}
+   
+    	function fadeOutModalBox(num) {
+			setTimeout(function(){ $(".responsive-calendar-modal").fadeOut(); }, num);
+   		}    	
+ 
+    	function initCalendar() {
+        	$(".responsive-calendar").responsiveCalendar({
+            	events: JSON.parse(jsonEvents),
+            	onActiveDayHover: function(events) {
+                	var $today, $dayEvents, $i, $isHoveredOver, $placeholder, $output;
+                	$i = $(this).data('year')+'-'+zero($(this).data('month'))+'-'+zero($(this).data('day'));
+          	
+                	$isHoveredOver = mouseIsOver($(this));
+                
+                	$placeholder = $(".responsive-calendar-placeholder");
+                	$today= events[$i];
+                              
+                	$dayEvents = $today.dayEvents;
+                	$output = '<div class="responsive-calendar-modal">';
+                	$.each($dayEvents, function() {
+                  		$.each( $(this), function( key ){
+                    		$output += $(this)[key].name +' at ' + $(this)[key].hour + '</p>';
+                  		});
+                	});
+                	$output + '</div>';
+                	if ( $isHoveredOver ) {
+                    	$placeholder.html($output);
+                  	}
+                  	else {
+                    	fadeOutModalBox(500);
+                  	}
+            	}
+          	});   	
+    	}
+    
+    	$(document).ready(function () {
+    		initCalendar();
+    	});
+    </script>
+  </body>
+</html>

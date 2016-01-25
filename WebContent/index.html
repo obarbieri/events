@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Responsive Calendar Widget that will make your day</title>
+    <meta name="distributor" content="Global" />
+    <meta itemprop="contentRating" content="General" />
+    <meta name="robots" content="All" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="description" content="The source of truly unique and awesome jquery plugins." />
+    <meta name="keywords" content="slider, carousel, responsive, swipe, one to one movement, touch devices, jquery, plugin, bootstrap compatible, html5, css3" />
+    <meta name="author" content="w3widgets.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- JQuery -->
+    <script src="js/jquery-2.2.0.js"></script>
+    <script src="js/jquery-ui.js"></script>
+      <link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+	
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.1.1/css/bootstrap.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" href="css/font-awesome.css">
+	<link rel="stylesheet" href="css/custom.css"> 
+
+        <!-- Social media -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Responsive slider -->
+    <link href="css/calendar/responsive-calendar.css" rel="stylesheet">
+    <link href="css/calendar/badge.css" rel="stylesheet">
+
+    <!-- Date picker -->	    
+	<link rel="stylesheet" href="css/datepicker/bootstrap-datepicker.min.css" />
+
+    <!-- Flags -->
+	<link rel="stylesheet" type="text/css" href="css/flag-icon.css" />
+
+
+	<style>
+  		#map-container { height: 450px }
+
+		.highlight {
+			background-color: #FFFF00;
+		}	  
+  		
+  		span.location {
+  			color: 	#8B0000;
+  			text-transform: uppercase;
+  		}
+
+  		span.fees {
+  			color: 	#8B0000;
+  		}
+  		
+		.navbar-center {
+    		position: absolute;
+    		width: 100%;
+    		left: 0;
+    		top: 0;
+    		text-align: center;
+    		margin: auto;
+  			height:100%;
+		}
+		
+		.jbreadcrumb { 
+			list-style: none; 
+			overflow: hidden; 
+			font: 12px Helvetica, Arial, Sans-Serif;
+			margin: 0; 
+			padding: 0;
+		}
+		.jbreadcrumb li { 
+			float: left; 
+			margin-left: 0;		
+		}
+		.jbreadcrumb li a {
+			color: white;
+			text-decoration: none; 
+			padding: 10px 0 10px 55px;
+			background: brown;                   /* fallback color */
+			background: hsla(34,85%,35%,1); 
+			position: relative; 
+			display: block;
+			float: left;
+		}
+		.jbreadcrumb li a:after { 
+			content: " "; 
+			display: block; 
+			width: 0; 
+			height: 0;
+			border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+			border-bottom: 50px solid transparent;
+			border-left: 30px solid hsla(34,85%,35%,1);
+			position: absolute;
+			top: 50%;
+			margin-top: -50px; 
+			left: 100%;
+			z-index: 2; 
+		}	
+		.jbreadcrumb li a:before { 
+			content: " "; 
+			display: block; 
+			width: 0; 
+			height: 0;
+			border-top: 50px solid transparent;           /* Go big on the size, and let overflow hide */
+			border-bottom: 50px solid transparent;
+			border-left: 30px solid white;
+			position: absolute;
+			top: 50%;
+			margin-top: -50px; 
+			margin-left: 1px;
+			left: 100%;
+			z-index: 1; 
+		}	
+		.jbreadcrumb li:first-child a {
+			padding-left: 10px;
+		}
+		.jbreadcrumb li:nth-child(2) a       { background:        hsla(34,85%,45%,1); }
+		.jbreadcrumb li:nth-child(2) a:after { border-left-color: hsla(34,85%,45%,1); }
+		.jbreadcrumb li:nth-child(3) a       { background:        hsla(34,85%,55%,1); }
+		.jbreadcrumb li:nth-child(3) a:after { border-left-color: hsla(34,85%,55%,1); }
+		.jbreadcrumb li:nth-child(4) a       { background:        hsla(34,85%,65%,1); }
+		.jbreadcrumb li:nth-child(4) a:after { border-left-color: hsla(34,85%,65%,1); }
+		.jbreadcrumb li:nth-child(5) a       { background:        hsla(34,85%,75%,1); }
+		.jbreadcrumb li:nth-child(5) a:after { border-left-color: hsla(34,85%,75%,1); }
+		.jbreadcrumb li:last-child a {
+			background: white !important;
+			color: black;
+			pointer-events: none;
+ 			cursor: default;
+		}
+		.jbreadcrumb li:last-child a:after { border: 0; }
+		.jbreadcrumb li a:hover { background: hsla(34,85%,25%,1); }
+		.jbreadcrumb li a:hover:after { border-left-color: hsla(34,85%,25%,1) !important; }
+		
+	</style>      
+  </head>
+  <body>
+  
+	<nav class="navbar navbar-inverse" role="navigation">
+    	<!-- Brand and toggle get grouped for better mobile display -->
+    	<div class="navbar-header">
+      		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+        		<span class="sr-only">Toggle navigation</span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+        		<span class="icon-bar"></span>
+      		</button>
+      		&nbsp;
+    	</div>
+    	<!-- Collect the nav links, forms, and other content for toggling -->
+    	<div class="collapse navbar-collapse" id="navbar-collapse-1">
+     
+      		<ul class="nav navbar-nav navbar-right">
+        		<li>
+          			<a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
+						<span class="caret"></span>
+						<span id="selectedlang">English (US)  </span><i id="langicon" class='flag-icon flag-icon-us'></i>
+		  			</a>
+          			<ul class="dropdown-menu" role="menu">
+            			<li id="li_us" class="hidden"><a href="#" data-link="ge" onclick="changeLanguage('us', 'English (US)  ')">English (US)  <i class='flag-icon flag-icon-us'></i></a></li>
+            			<li id="li_fr"><a href="#" data-link="fr" onclick="changeLanguage('fr', 'Français  ')">Français  <i class='flag-icon flag-icon-fr'></i></a></li>
+            			<li id="li_dz"><a href="#" data-link="dz" onclick="changeLanguage('dz', 'العربية  ')">العربية  <i class='flag-icon flag-icon-dz'></i></a></li>
+          			</ul>
+        		</li>
+      		</ul>
+    	</div><!-- /.navbar-collapse -->
+	</nav>
+  	   
+  	   
+    <div class="container">
+         
+    	<div class="row">    	
+   		<div class="col-sm-9">
+				<ul class="jbreadcrumb">
+					<li><a href="/events">Home</a></li>
+					<li><a href="#">Events</a></li>
+				</ul>
+				<br>
+    			<div id="messages">
+				</div>
+    	
+				<form id="dateRangeForm" method="get" class="form-horizontal" action="index.html">  
+					<a href="javascript:void(0)" class="btn btn-success" onclick="changeClass('#all_events', 'btn btn-info');changeClass('#week_events', 'btn btn-success');changeClass('#thisweekend_events', 'btn btn-success');getEvents('all');" rel="all" id="all_events"><span>All Events</span></a> 
+					<a href="javascript:void(0)" class=" btn btn-success" onclick="changeClass('#all_events', 'btn btn-success');changeClass('#week_events', 'btn btn-info');changeClass('#thisweekend_events', 'btn btn-success');getEvents('week');" rel="week" id="week_events"><span>This Week</span></a> 
+					<a href="javascript:void(0)" class=" btn btn-success" onclick="changeClass('#all_events', 'btn btn-success');changeClass('#week_events', 'btn btn-success');changeClass('#thisweekend_events', 'btn btn-info');getEvents('weekend');" rel="weekend" id="thisweekend_events"><span>This Weekend</span></a>
+					<label class="input-append date"><span>Pick Date:</span></label> 
+					<input placeholder="yyyy-mm-dd" class="input-sm" type="text" size="15" value="" id="jform_start" name="start_date" autocomplete="off" /> 
+					<input placeholder="yyyy-mm-dd" class="input-sm" type="text" size="15" value="" id="jform_end" name="end_date" style="display: inline;" autocomplete="off" />
+    				<script type="text/javascript">
+    					$(document).ready(function() {
+    		    			$('#jform_start')
+    		        			.datepicker({
+    		        				todayHighlight: true,
+    		        				format: 'yyyy-mm-dd',
+    		            			startDate: '2010-01-01',
+    		            			endDate: '2030-12-31'
+    		        			}),
+    		    			$('#jform_end')
+    		        			.datepicker({
+    		        				todayHighlight: true,
+    		            			format: 'yyyy-mm-dd',
+    		            			startDate: '2010-01-01',
+    		            			endDate: '2030-12-31'
+    		        		})
+
+    		    		});
+    	    		</script>
+					<input id="period" type="hidden"/> 
+					<input id="day" type="hidden"/> 
+					<input id="category" name="category" type="hidden"/> 
+					<button form="dateRangeForm" class="btn btn-info" id="inp-pick-go" name="pick-go" onclick="return checkPickDate();disableClasses();">Go</button>
+    				<p></p>
+    				<div id="events_list">
+	            	</div>
+    			</form>	
+    		</div>
+        	<div class="col-sm-3">
+
+      			<!-- Responsive calendar - START -->
+    			<div class="responsive-calendar">
+        			<div class="controls">
+            			<a class="pull-left" data-go="prev"><div class="btn btn-primary">Prev</div></a>
+            			<h4><span data-head-year></span> <span data-head-month></span></h4>
+            			<a class="pull-right" data-go="next"><div class="btn btn-primary">Next</div></a>
+        			</div><hr/>
+        			<div class="day-headers">
+          				<div class="day header">Mon</div>
+          				<div class="day header">Tue</div>
+          				<div class="day header">Wed</div>
+          				<div class="day header">Thu</div>
+          				<div class="day header">Fri</div>
+          				<div class="day header">Sat</div>
+          				<div class="day header">Sun</div>
+        			</div>
+        			<div class="days" data-group="days">          
+        			</div>
+      			</div>
+      			<!-- Responsive calendar - END -->
+				<!-- Placeholder -->
+  				<div class="responsive-calendar-placeholder">      			
+    			</div>
+    			<p></p>
+      			<form id="searchform" method="get" role="search">
+        			<div class="form-group col-xs-10">
+          				<input id="autocomplete" type="search" class="form-control" placeholder="Search">
+          				<input id="search" name="search" type="hidden">
+        			</div>
+        			<button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+      			</form>
+    			
+			</div>			
+		</div> <!-- /row -->
+		
+		<!-- Modal -->
+  		<div class="modal fade" id="mapmodals">
+    		<div class="modal-dialog modal-lg">
+      			<div class="modal-content">
+        			<div class="modal-header">
+          				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          				<h4 class="modal-title" id ="modal_title"></h4>
+        			</div>
+        			<div class="modal-body">
+          				<div id="map-container"></div>
+        			</div>
+        			<div class="modal-footer">
+          				<button type="button" class="close" data-dismiss="modal">Close</button>
+        			</div>
+      			</div><!-- /.modal-content -->
+    		</div><!-- /.modal-dialog -->
+  		</div><!-- /.modal -->		
+	</div> <!-- /container -->
+
+	<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+
+
+    <script type="text/javascript">
+    	
+    	function toString(str) {
+    		if (str == null || str == '' || str == "undefined") {
+    			return null; 
+    		}
+    		return str;
+    	}
+
+    	function buildUrlParamsBreadcrumb(value, type) {
+    		urlParams = '';
+    		if (value != null && type != null) {
+    			urlParams = addUrlParams(type, value);	
+    		}
+    		
+    		urlParams += addUrlParams('day', toString($('#day').val()));
+    		urlParams += addUrlParams('period', toString($('#period').val()));
+    		urlParams += addUrlParams('start_date', toString($('#jform_start').val()));    		
+    		urlParams += addUrlParams('end_date', toString($('#jform_end').val()));
+    		
+    		return urlParams;
+    	}
+    	
+    	function buildUrlParams(value, type) {
+    		var urlParams = addUrlParams(type, value);
+    		if (type == 'category') {
+        		urlParams += addUrlParams('id', toString($('#id').val()));
+    		}
+    		else if (type == 'id') {
+        		urlParams += addUrlParams('category', toString($('#category').val()));    			
+    		}
+    		urlParams += addUrlParams('day', toString($('#day').val()));
+    		urlParams += addUrlParams('period', toString($('#period').val()));
+    		urlParams += addUrlParams('start_date', toString($('#jform_start').val()));    		
+    		urlParams += addUrlParams('end_date', toString($('#jform_end').val()));
+    		
+    		return urlParams;
+    	}
+    
+    	function addUrlParams(paramName, paramValue) {
+    		var params = '';
+        	if (paramValue != null & paramValue != '') {
+        		params += '&' + paramName + '=' + paramValue;
+    		}
+    		return params;
+    	}
+    	
+    	function calculateSize(events) {
+    		var nb=0;
+    		$.each(events, function(k,v){
+    			$.each(v.dayEvents, function(k1,v1){
+    				nb++;
+            	});
+    		});
+    		return nb;
+    	}
+
+    	function getDayEventsList(events) {
+    		var results = '{\"dayEvents\":{';
+    		var nb = calculateSize(events);
+    		var i = 1;
+    		$.each(events, function(k,v){
+    			$.each(v.dayEvents, function(k1,v1){
+    				results += '\"' + v1.id + '\"';
+    				results += ':';
+    				results += '\"' + v1.name + '\"';
+    				if (i < nb) {
+    					results += ',';
+    				}
+    				i++;
+            	});
+    		});
+    		results += '}}';
+    		return results;
+    	}
+    
+    	//var var_map;
+		var var_title;
+
+		function buildBreadcrumb(level1, level2) {
+		  	var $breadcrumb = '<li><a href="/events">Home</a></li><li><a href="index.html?' + buildUrlParamsBreadcrumb(null, null) + '">Events</a></li><li><a href="index.html?' + buildUrlParamsBreadcrumb(level1, 'category') + '">' + level1 + '</a></li>';
+		  	if (level2 != null && level2 != '') {
+		  		$breadcrumb += '<li><a href="#">' + level2 + '</a></li>';
+		  	}
+		    $('.jbreadcrumb').html($breadcrumb);
+		}
+		
+		function changeLanguage(lang, text) {
+			var liId = "#li_" + lang; 
+			$('#selectedlang').text(text);
+			$('#langicon').removeClass($('#langicon').attr("class"));
+			$('#langicon').addClass("flag-icon flag-icon-" + lang);
+			$('#li_us').removeClass("hidden");
+			$('#li_fr').removeClass("hidden");
+			$('#li_dz').removeClass("hidden");
+			$(liId).addClass("hidden");
+		}
+		
+		function disableClasses() {
+        	changeClass('#all_events', 'btn btn-success');
+        	changeClass('#week_events', 'btn btn-success');
+        	changeClass('#thisweekend_events', 'btn btn-success');
+		}
+		
+		function changeClasses(type) {
+			if (type == 'all') {
+				changeClass('#all_events', 'btn btn-info');
+				changeClass('#week_events', 'btn btn-success');
+				changeClass('#thisweekend_events', 'btn btn-success');
+			}
+			else if (type == 'week') {
+				changeClass('#all_events', 'btn btn-success');
+				changeClass('#week_events', 'btn btn-info');
+				changeClass('#thisweekend_events', 'btn btn-success');
+			}
+			else if (type == 'weekend') {
+				changeClass('#all_events', 'btn btn-success');
+				changeClass('#week_events', 'btn btn-success');
+				changeClass('#thisweekend_events', 'btn btn-info');
+			}
+		}
+		
+        function changeClass(id, newClass) {
+        	$('#messages').html('');
+            var old_Class = $(id).attr('class'); 
+  
+           	$(id).removeClass(old_Class);
+            $(id).addClass(newClass);
+        }
+              
+        function createInfoMsgPickDate(date_start, date_end) {
+    		$infoMsgBox = $('#messages');
+        	$info = displayMessage('info', 'Selection: from ' + formatDate(date_start, null) + ' to ' + formatDate(date_end, null));
+        	$infoMsgBox.html($info);
+        	
+        }
+        
+        function checkPickDate() {
+        	date_start = document.getElementById('jform_start').value;
+           	date_end = document.getElementById('jform_end').value;
+           	
+    		$errorMsgBox = $('#messages');
+           	if (date_start == '') {           		
+        		$errors = displayMessage('error', 'Start date is empty.');
+        		$errorMsgBox.html($errors);
+        		return false;
+           	}
+           	if (date_end == '') {           		
+        		$errors = displayMessage('error', 'End date is empty.');
+        		$errorMsgBox.html($errors);
+        		return false;
+           	}
+           	
+           	if (dateIsGreater(date_start, date_end)) {
+        		$errors = displayMessage('error', 'End date is before start date.');
+        		$errorMsgBox.html($errors);
+        		return false;
+           	}
+           	
+           	return true;
+        }
+        
+        function displayMessage(type, msg) {
+        	$classType = '';
+        	$iconType = '';
+        	
+        	if (type == 'error') {
+        		$classType = '<div class="alert alert-danger fade in">';
+        		$iconType = '<div class="glyphicon glyphicon-ban-circle"></div>';
+        	}
+        	else if (type == 'warning') {
+        		$classType = '<div class="alert alert-warning fade in">';
+        		$iconType = '<div class="glyphicon glyphicon-warning-sign"></div>';     		
+        	}
+        	else if (type == 'info') {
+        		$classType = '<div class="alert alert-info fade in">';
+        		$iconType = '<div class="glyphicon glyphicon-info-sign"></div>';     		
+        	}
+        	else if (type == 'success') {
+        		$classType = '<div class="alert alert-success fade in">';
+        		$iconType = '<div class="glyphicon glyphicon-ok-circle"></div>'; 		
+        	}
+        	
+        	return $classType + '<a href="#" class="close" data-dismiss="alert">&times;</a>' + $iconType + ' ' + msg + '</div>';
+        }
+        
+		function initialize(event) {
+			$("#modal_title").text($(event.relatedTarget).data('address'));
+			var loc_lat = $(event.relatedTarget).data('lat');
+			var loc_lng = $(event.relatedTarget).data('lng');
+			var loc_name = $(event.relatedTarget).data('name');
+			
+			var mapOptions = {
+				center: new google.maps.LatLng(parseFloat(loc_lat), parseFloat(loc_lng)),
+			    zoom: 14,
+			    mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			  
+			var map = new google.maps.Map(document.getElementById("map-container"), mapOptions);
+			  
+			var marker = new google.maps.Marker({
+				position: new google.maps.LatLng(parseFloat(loc_lat), parseFloat(loc_lng)),
+				title:"Click for information for " + loc_name,
+      			maxWidth: 200,
+      			maxHeight: 200
+			});
+			marker.setMap(map);
+		}
+
+		$("#mapmodals").on("shown.bs.modal", function (event) {initialize(event);});
+
+    
+    	//var str2 = '{"2016-01-11":{"badgeClass":"badge-warning", "number": 2, "url": "http://www.google.com", "dayEvents": [{"name": "Important meeting","hour": "17:30" },{"name": "Morning meeting at coffee house","hour": "08:15" }]},' + '"2016-01-30":{"badgeClass":"badge-warning", "number": 1, "url": "http://www.google.com", "dayEvents": [{"name": "Tennis","hour": "20:00" }]}}';
+    	
+    	function formatDate(date_event, time) {
+    		var d = Date.parse(date_event);
+    		var formatedDate = d.toString("dddd, MMMM d, yyyy");
+    		if (time != null) {
+    			formatedDate += ' ' + time;
+    		}
+    		return formatedDate;
+    	}
+
+    	function dateCheck(from,to,check) {
+    		return (Date.parse(check.toString("yyyy-MM-dd")).between(Date.parse(from.toString("yyyy-MM-dd")), Date.parse(to.toString("yyyy-MM-dd"))));
+    	}
+
+    	function dateIsGreater(date,check) {
+    		return (Date.parse(date.toString("yyyy-MM-dd")).compareTo(Date.parse(check.toString("yyyy-MM-dd"))) >= 0);
+    	}
+    	
+    	function mouseIsOver(what){
+        	var temp = $(what).parent().find(":hover");
+        	return temp.length == 1;
+    	}
+    
+    	function zero(num) {
+    		if (num < 10) { return "0" + num; }
+        	else { return "" + num; }
+   		}
+   
+    	function fadeOutModalBox(num) {
+			setTimeout(function(){ $(".responsive-calendar-modal").fadeOut(); }, num);
+   		}
+    	
+    	function getIndex(what) {
+    		return $(what).data('year')+'-'+zero($(what).data('month'))+'-'+zero($(what).data('day'));
+    	}
+ 
+    	function displayAll(events, category) {
+    		$eventslist = $('#events_list');
+    		$output = '';
+    		$.each(events, function (keyEvent, dataEvent) {
+    			$output += display(keyEvent, dataEvent, category);
+    		});
+    		$eventslist.html($output);
+    	}
+
+    	function querySt(Key) {
+    	    var url = window.location.href;
+    	    KeysValues = url.split(/[\?&]+/);
+    	    for (i = 0; i < KeysValues.length; i++) {
+    	        KeyValue = KeysValues[i].split("=");
+    	        if (KeyValue[0] == Key) {
+    	            return KeyValue[1];
+    	        }
+    	    }
+    	}    	
+
+    	function initControls() {
+			var period = getQuerySt('period', false);
+			var date_start = getQuerySt('start_date', false);
+           	var date_end =getQuerySt('end_date', false);
+           	var category = getQuerySt('category', true);
+           	var id = getQuerySt('id', false);
+           	var day = getQuerySt('day', false);
+
+           	changeClasses(period);
+           	if ((day != null && day != '') || (date_start != null && date_start != '' && date_end != null && date_end != '')) {
+           		disableClasses();
+           	}
+           	
+           	$('#period').val(period);
+           	$('#date_start').val(date_start);
+           	$('#date_end').val(date_end);
+           	$('#category').val(category);
+           	$('#id').val(id);
+           	$('#day').val(day);
+    	}
+    	
+    	function getQuerySt(id, decode) {
+    		var attr = querySt(id);
+    		if (attr != null && attr != "undefined" && attr != '') {
+    			if (decode) {
+    				return decodeURIComponent(attr); 
+    			}
+    			return attr;
+    		}
+    		return null;
+    	}
+    	
+    	function isInitialize() {
+			var period = getQuerySt('period', false);
+			var date_start = getQuerySt('start_date', false);
+           	var date_end = getQuerySt('end_date', false);
+           	var category = getQuerySt('category', true);//querySt('category')!=null && querySt('category')!="undefined" ? decodeURIComponent(querySt('category')):null;
+           	var id = getQuerySt('id', false);
+           	var day = getQuerySt('day', false);
+
+
+           	return (period==null && date_start==null && date_end==null && category==null && id==null && day==null);
+    	}
+    	
+    	function isPickDate(date_start, date_end) {
+           	return (date_start!=null && date_end!=null);
+    	}
+    	
+    	function displaySelectedDate(events, date_start, date_end, category) {
+           	if (date_start != '' && date_end != '') {
+        		$("#jform_start").val(date_start);
+        		$("#jform_end").val(date_end);
+        		
+        		$eventslist = $('#events_list');
+				var $output = displayDateRange(events, date_start, date_end, category);
+        		$eventslist.html($output);
+        		
+        		if (category != null) {
+        			buildBreadcrumb(category, null);
+        		}
+        		createInfoMsgPickDate(date_start, date_end);
+           	}
+    	}
+
+    	function getEventById(events, id) {
+    		var results = {};
+    		var found = false;
+    		$.each(events, function(k,v){
+    			var dayEventsArr = [];
+    			$.each(v.dayEvents, function(k1,v1){
+    				if (v1.id == id) {
+    					found = true;
+    					dayEventsArr.push(v1);
+    					results[k] = dayEventsArr;
+    					return false;
+    				}
+    	        });
+    			if (found) return false; 
+    		});
+    		return results;
+    	}
+
+    	function getEventByName(events, name) {
+    		var results = {};
+    		var found = false;
+    		$.each(events, function(k,v){
+    			var dayEventsArr = [];
+    			$.each(v.dayEvents, function(k1,v1){
+    				compare = v1.name.replace(/\s/g, '+');
+    				compare = encodeURIComponent(compare);
+					//alert('compare ' + compare + ' to ' + name);
+    				if (compare == name) {
+    					//alert('found ' + v1.name + '(' + compare + ' to ' + name + ')');
+    					found = true;
+    					dayEventsArr.push(v1);
+    					results[k] = dayEventsArr;
+    					return false;
+    				}
+    	        });
+    			if (found) return false; 
+    		});
+    		return results;
+    	}
+    	
+    	function displaySingleEvent(events, category, value, isSearchBox) {
+    		var events;
+    		if (isSearchBox) {
+    			events = getEventByName(events, value);
+    		}
+    		else {
+    			events = getEventById(events, value);	
+    		}
+    		$output = '';
+    		var found = false;
+    		$.each(events, function(k,v){
+    			$.each(v, function(k1,v1){
+    				$output = createEventDetailHtml(k, v1);
+    				$eventslist = $('#events_list');
+    				$eventslist.html($output);
+    				if (category == null || category == '') {
+    					buildBreadcrumb(v1.name, null);	
+    				}
+    				else {
+    					buildBreadcrumb(category, v1.name);
+    				}
+    				
+    				if ($output!=null && $output!='') {
+    					found = true;
+    					return false;
+    				}
+                })
+                if (found) return false;
+    		})
+    	}
+
+    	function displayEventsByName(events, name) {
+    		var events = getEventByName(events, name);
+    		$output = '';
+    		var found = false;
+    		$.each(events, function(k,v){
+				$output += display(k, v, null);	
+    			$eventslist = $('#events_list');
+    			$eventslist.html($output);
+    		})
+    	}
+    	
+    	function displayDateRange(events, startDate, endDate, category) {
+    		$output = '';
+    		$.each(events, function (keyEvent, dataEvent) {
+    			if (dateCheck(startDate, endDate, keyEvent)) {
+    				$output += display(keyEvent, dataEvent, category);	
+    			}
+    		});
+    		if ($output != '') {
+        		$eventslist = $('#events_list');
+        		$eventslist.html($output);    			
+    		}
+    		else {
+    			displayNoEvent('No event from ' + startDate.toString("yyyy-MM-dd") + ' to ' + endDate.toString("yyyy-MM-dd"));
+    		}
+    	}
+    	
+    	function displayNoEvent(text) {
+    		$eventslist = $('#events_list');
+        	$output = '<div class="col-sm-12" style="background-color:lavender;">' + text + '</div>';
+    		
+    		$eventslist.html($output);    		
+    	}
+
+    	function createEventDetailHtml(date, event) {
+    		var fees = 'free';
+    		var left = 'unlimited';
+    		if (event.fees != null) {
+    			fees = event.fees;
+    		}
+    		if (event.left != null) {
+    			left = event.left;
+    		}
+            $output = '<div class="col-sm-12" style="background-color:lavender;"></div>';
+			$output += '<div><h3>' + event.name + '</h3>';
+			$output += '<div><span class="glyphicon glyphicon-calendar"/></span> <span class="dtstart" id="infor_date"> <span class="date">' + formatDate(date, event.start_time) + '</span> - <span class="date">' + formatDate(date, event.start_time) + '</span></div>';
+			$output += '<div><a href="#mapmodals" title="Get location" data-toggle="modal" role="button" data-name="' + event.location['name'] + '" data-address="' + event.location['address'] + '" data-lat="' + event.location['lat'] + '" data-lng="' + event.location['lng'] + '"><span class="glyphicon glyphicon-map-marker"></span></a><span class="location"> ' + event.location['name'] + '</span></div>';
+			$output += '<div><span class="glyphicon glyphicon-pushpin"></span><span> ' + event.location['address'] + '</span></div>';
+			$output += '<div><span class="glyphicon glyphicon-usd"></span><span> Start from: </span><span class="fees">' + fees + '</span><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Place left: </span><span class="fees">' + left + '</span></div>';
+			$output += '<p></p>';
+			if (event.detailHtml != null) {
+				$output += '<div>' + event.detailHtml + '</div>';
+				$output += '<p></p>';				
+			}
+			$output += '<div><span> <strong style="color: black; font-weight: bold;">Category</strong> <a href="index.html?' + buildUrlParams(event.category, 'category') + '" title="' + event.category + '">' + event.category + '</a></span></div>';
+			$output += '<p></p>';
+    		    
+    		return $output;
+    	}
+    	
+    	function display(keyEvent, event, category) {
+    		var $dayEvents = event.dayEvents;
+    		$output = '';
+            $.each($dayEvents, function(keyDayEvent, dataDayEvent) {
+            	if (category == null || dataDayEvent.category == category) {
+            		$output += '<div class="col-sm-12" style="background-color:lavender;"></div>';
+					$output += '<div class="col-sm-3"><h3><img src="' + dataDayEvent.image['url'] + '" alt=' + dataDayEvent.image['alt'] + '" title="' + dataDayEvent.image['title'] + '" width="176" height="117" /></h3></div>';
+					$output += '<div class="col-sm-9"><h3><a href="index.html?' + buildUrlParams(dataDayEvent.id, 'id') + '">' + dataDayEvent.name + '</a></h3>';
+					$output += '<div><span class="glyphicon glyphicon-calendar"/></span> <span class="dtstart" id="infor_date"> <span class="date">' + formatDate(keyEvent, dataDayEvent.start_time) + '</span> - <span class="date">' + formatDate(keyEvent, dataDayEvent.start_time) + '</span></div>';
+					$output += '<div><a href="#mapmodals" title="Get location" data-toggle="modal" role="button" data-name="' + dataDayEvent.location['name'] + '" data-address="' + dataDayEvent.location['address'] + '" data-lat="' + dataDayEvent.location['lat'] + '" data-lng="' + dataDayEvent.location['lng'] + '"><span class="glyphicon glyphicon-map-marker"></span></a><span><a href="#" title="' + dataDayEvent.location['name'] + '">' + dataDayEvent.location['name'] + '</a></span></div>';
+					$output += '<div><span class="glyphicon glyphicon-pushpin"></span><span>' + dataDayEvent.location['address'] + '</span></div>';
+					$output += '<p></p>';
+					$output += '<div><span>' + dataDayEvent.detail + '</span></div>';
+					$output += '<p></p>';
+					$output += '<div><span> <strong style="color: black; font-weight: bold;">Category</strong> <a href="index.html?' + buildUrlParams(dataDayEvent.category, 'category') + '" title="' + dataDayEvent.category + '">' + dataDayEvent.category + '</a></span></div>';
+					$output += '<p></p>';
+					var $socialMedias = dataDayEvent.socialMedias;
+					if ($socialMedias != null) {
+						$.each($socialMedias, function(keySocialMedia, dataSocialMedia) {
+							$output += '<a href="' + dataSocialMedia.url + '" class="btn azm-social azm-size-32 azm-' + dataSocialMedia.classType + '"><i class="fa fa-' + dataSocialMedia.classType + '"></i></a>';
+						});
+						$output += '<p></p>';
+					}
+					$output += '<p></p>';
+					$output += '</div>';
+            	}
+             });
+    		    
+    		return $output;
+    	}
+
+    	
+    	function displayDayEvents(events, key) {
+        	var thisDayEvents;
+        	 
+        	DisableClasses();
+        	
+        	thisDayEvents = events[key];
+        	
+    		$eventslist = $('#events_list');
+           	var category = getQuerySt('category', true);
+    		var $output = display(key, thisDayEvents, category);
+    		$eventslist.html($output);
+
+    		$('#day').val(key);
+    		$('#period').val(null);
+    		$('#jform_start').val(null);
+    		$('#jform_end').val(null);
+    		
+    		$infoMsgBox = $('#messages');
+        	$info = displayMessage('info', 'Selection: ' + formatDate(key, null));
+        	$infoMsgBox.html($info);
+    		
+    	}
+    	
+    	function initCalendar(data) {
+        	$(".responsive-calendar").responsiveCalendar({
+            	events: data,
+            	onActiveDayHover: function(events) {
+                	var $today, $dayEvents, $i, $isHoveredOver, $placeholder, $output;
+                	$i = getIndex($(this));
+          	
+                	$isHoveredOver = mouseIsOver($(this));
+                
+                	$placeholder = $(".responsive-calendar-placeholder");
+                	$today= events[$i];
+                              
+                	$dayEvents = $today.dayEvents;
+                	$output = '<div class="responsive-calendar-modal">';
+                	$.each($dayEvents, function() {
+                  		$.each( $(this), function( key ){
+                    		$output += $(this)[key].name +' at ' + $(this)[key].start_time +' and end at ' + $(this)[key].end_time + '</p>';
+                  		});
+                	});
+                	$output + '</div>';
+                	if ( $isHoveredOver ) {
+                    	$placeholder.html($output);
+                  	}
+                  	else {
+                    	fadeOutModalBox(500);
+                  	}
+            	},
+            	onActiveDayClick: function(events) {
+                	var thisDayEvents, key;
+ 
+                	
+                	key = getIndex($(this));
+                	thisDayEvents = events[key];
+
+                	disableClasses();
+            		$('#day').val(key);
+            		$('#period').val(null);
+            		$('#jform_start').val(null);
+            		$('#jform_end').val(null);
+                	
+                   	var category = getQuerySt('category', true);
+            		var $output = display(key, thisDayEvents, category);
+            		if (category != null && $output == '') {
+        				displayNoEvent('No event for ' + formatDate(key, null));
+            		}
+            		else {
+                		$eventslist = $('#events_list');
+                		$eventslist.html($output);            			
+            		}
+            		
+            		$infoMsgBox = $('#messages');
+                	$info = displayMessage('info', 'Selection: ' + formatDate(key, null));
+                	$infoMsgBox.html($info);
+              	}            	
+          	});
+    	}
+    	
+    	function isCategorySelected() {
+    		return querySt('category') != null && querySt('category')!="undefined" && decodeURIComponent(querySt('category')) != '';
+    	}
+
+    	function isDaySelected() {
+    		return querySt('day') != null && querySt('day')!="undefined" && querySt('day') != '';
+    	}
+
+    	
+    	function isPeriodSelected() {
+    		return $('#period').val() != null && $('#period').val()!="undefined" && $('#period').val() != '';
+    	} 
+
+    	function getEvents(type) {
+  			$('#period').val(type);
+			$('#day').val(null);
+			$('#jform_start').val(null);
+			$('#jform_end').val(null);
+			var category = getQuerySt('category', true);
+  			$.getJSON('json/events.json', function(data) {
+   				if (type == 'all') {
+    				displayAll(data, category);
+    			}
+    			else if (type == 'weekend') {
+    				var saturday, sunday;
+    				if (Date.today().is().saturday()) {
+    					saturday = Date.today();
+    					sunday = Date.today().next().sunday();
+    				}
+    				else if (Date.today().is().sunday()) {
+    					saturday = Date.today().addDays(-1);
+    					sunday = Date.today();
+    				}
+    				else {
+        				saturday = Date.today().next().saturday();
+        				sunday = Date.today().next().sunday();    					
+    				}
+    				displayDateRange(data, saturday, sunday, category);
+    			}
+    			else if (type == 'week') {
+    				var dateStart = Date.today().last().monday();
+    				var dateEnd;
+    				if (Date.today().is().sunday()) {
+    					dateEnd = Date.today();
+    				}
+    				else {
+    					dateEnd = Date.today().next().sunday();
+    				}
+    				
+    				displayDateRange(data, dateStart, dateEnd, category);
+    			}
+        	});    		
+    	}
+    	
+    	$(document).ready(function () {
+			var todayStr = Date.today().toString("yyyy-MM-dd");
+    		$.getJSON('json/events.json', function(data) {
+    			initCalendar(data);
+    			initControls();
+    			
+               	var id = getQuerySt('id', false);
+               	var category = getQuerySt('category', true);
+    			var date_start = getQuerySt('start_date', false);
+               	var date_end = getQuerySt('end_date', false);
+               	var day = getQuerySt('day', false);
+               	
+               	var searchBox = getQuerySt('search', false);
+               	if (searchBox != null) {
+               		searchBox = encodeURIComponent(searchBox);
+               		//searchBox = searchBox.replace(new RegExp("\\+","g"),' ');
+    				displaySingleEvent(data, null, searchBox, true);
+               	}
+               	else if (isInitialize() || (day != null && id == null)) {
+               		if (day == null) {
+               			day = todayStr;
+               		}
+    				$('#day').val(day);
+        			var dayEvents= data[day];
+        			if (dayEvents == null) {
+        				displayNoEvent('No event for ' + formatDate(day, null));	
+        			}
+        			else {
+                		$eventslist = $('#events_list');
+        				var $output = display(day, dayEvents, category);
+                		$eventslist.html($output);	
+        			}
+        			if (category != null) {
+        				buildBreadcrumb(category, null);
+        			}
+        			
+            		$infoMsgBox = $('#messages');
+                	$info = displayMessage('info', 'Selection: ' + formatDate(day, null));
+                	$infoMsgBox.html($info);
+
+               	}
+               	else if (id != null && id != '') {
+    				displaySingleEvent(data, category, id, false);
+    				if (day != null) {
+                		$infoMsgBox = $('#messages');
+                    	$info = displayMessage('info', 'Selection: ' + formatDate(day, null));
+                    	$infoMsgBox.html($info);    					
+    				}
+    				else if (isPickDate(date_start, date_end)) {
+    	        		createInfoMsgPickDate(date_start, date_end);    					
+    				}
+    			}
+    			else if (isPickDate(date_start, date_end)) {
+    				var category = getQuerySt('category', true);
+    				displaySelectedDate(data, date_start, date_end, category);
+    			}
+    			else if (isCategorySelected()) {
+    				if (isDaySelected()) {
+    					var day = getQuery('day', false)
+    					displayDayEvents(data, day);
+                		$infoMsgBox = $('#messages');
+                    	$info = displayMessage('info', 'Selection: ' + formatDate(day, null));
+                    	$infoMsgBox.html($info);
+    				}
+    				else {
+    					getEvents(querySt('period'));
+    				}
+					buildBreadcrumb(category, null);
+    			}
+    			else if (isPeriodSelected()) {
+    				getEvents($('#period').val());
+    				//buildBreadcrumb(null, null);
+    			}
+        	});
+    		    		
+            $("#autocomplete").autocomplete({
+                minLength:2,
+                source: function (request, response) {
+                    $.getJSON("json/events.json", function (data) {
+						var dayEventsList = getDayEventsList(data);
+						var dayEventsJson = jQuery.parseJSON(dayEventsList);                    	
+                    	response($.map(dayEventsJson.dayEvents, function (value, key) {
+                    		if (value.toUpperCase().indexOf(request.term.toUpperCase()) != -1) {
+                    			return {
+                    				value: value,
+                    				label: value
+                    			}
+                    		}
+                    	}));
+                    });
+                },
+                select: function (event, ui) {
+                	$('#search').val(ui.item.value);
+                    $('#searchform').submit();
+                }
+            });    		
+    	});
+    	
+		 $.ui.autocomplete.prototype._renderItem = function (ul, item) {
+	     	item.label = item.label.replace(new RegExp("(?![^&;]+;)(?!<[^<>]*)(" + $.ui.autocomplete.escapeRegex(this.term) + ")(?![^<>]*>)(?![^&;]+;)", "gi"), "<strong class=\"highlight\">$1</strong>");
+	        return $("<li></li>")
+	                     .data("item.autocomplete", item)
+	                     .append("<a>" + item.label + "</a>")
+	                     .appendTo(ul);
+	     };
+    	
+    </script>
+    
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/calendar/responsive-calendar.js"></script>
+	<script src="js/datepicker/bootstrap-datepicker.min.js"></script>
+ 	<script src="js/date.js"></script>
+    
+  </body>
+</html>

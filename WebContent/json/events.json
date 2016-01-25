@@ -1,0 +1,143 @@
+{
+"2016-01-11":{
+	"badgeClass":"badge-warning", 
+	"number": 2, 
+	"dayEvents": [
+			{"id": "20160111_1",
+			"name": "Capital Welcome Drive for Syrian Refugees","start_time": "05:30pm", "end_time": "06:30pm", "image":{
+															"url":"img/capital-welcomes_slider_1450365340.jpg",
+															"alt":"Capital Welcome Drive for Syrian Refugees",
+															"title":"Capital Welcome Drive for Syrian Refugees"
+															},
+			"location": {"name": "Carleton University", "address":"1125 Colonel By Drive, Ottawa, K1S 5B6, ON, Canada", "lat": "45.382185", "lng": "-75.697327"},
+			"category":"Fundraisers",											
+			"socialMedias":[
+					{"classType": "facebook", "url": "https://www.facebook.com/muslimlink.ca"},
+					{"classType": "twitter", "url": "https://twitter.com/Muslim_Link"},
+					{"classType": "pinterest", "url": "https://www.pinterest.com/MuslimLink/"}
+				],											
+			"detail":"Capital Welcomes in collaboration with the Intercultural Dialogue Institute: University of Carleton and Ottawa are proud to announce that we are holding our second clothing drive at the University of Carleton..."
+			},
+			{"id": "20160111_2",
+			"name": "Canadian Policy in the Middle East with the Globe and Mail's Patrick Martin","start_time": "08:15am", "end_time": "10:00am", "image":{
+															 "url":"img/catholic-centre-for-immigrants-400x2501_slider_1450499098.jpg",
+															 "alt":"Circle of Friends Refugee Support Volunteer Information Registration Required Spaces are Limited",
+															 "title":"Circle of Friends Refugee Support Volunteer Information Registration Required Spaces are Limited"
+															 },
+			"location": {"name": "University of Ottawa Social Sciences Building", "address":"120 University Street, Ottawa, K1N 6N5, ON, Canada", "lat": "45.421759", "lng": "-75.683719"},
+			"category":"Lectures",
+			"socialMedias":[
+					{"classType": "youtube", "url": "https://www.youtube.com/user/MuslimLinkOttawa"},
+					{"classType": "linkedin", "url": "https://www.linkedin.com/company/muslim-link-ottawa%27s-muslim-community-newspaper"}
+				],														
+			"detail":"Going Forward: Canadian Policy in the Middle East Organized by Centre for International Policy StudiesEvent Date: January 11, 2016 - 4:00pmLocation: University of Ottawa, Social Sciences Building, 120..."
+			}
+		]
+	},
+"2016-01-14":{
+	"badgeClass":"badge-warning", 
+	"number": 3, 
+	"dayEvents": [
+			{"id": "20160114_1",
+			"name": "Circle of Friends Refugee Support Volunteer Information Registration Required Spaces are Limited","start_time": "09:00am", "end_time": "09:30am", "image":{
+												 "url":"img/omar-uddin-ottawa_slider_1450194858.jpg",
+												 "alt":"Arabic Calligraphy Workshop with Omar Uddin",
+												 "title":"Arabic Calligraphy Workshop with Omar Uddin"
+												},
+			"location": {"name": "Catholic Centre for Immigrants", "address":"219 Argyle Avenue, Ottawa, K2P, ON, Canada", "lat": "45.411426", "lng": "-75.690871"},
+			"category":"Information Workshops",												
+			"detail":"Circle of Friends Refugee Support Program Volunteer Information Session What: A new program sponsored by the Catholic Centre for Immigrants that links volunteers with newly-arrived Syrian refuges sponsored..."
+			},
+			{"id": "20160114_2",
+			"name": "Arabic Calligraphy Workshop with Omar Uddin","start_time": "10:00am", "end_time": "11:30am", "image":{
+														 	"url":"img/cumsa-sisters_slider_1452344173.jpg",
+												 			"alt":"CUMSA Sisters' Coffeehouse",
+												 			"title":"CUMSA Sisters' Coffeehouse"
+												 			},
+			"location": {"name": "University of Ottawa", "address":"550 Cumberland St, Ottawa, K1N6N5, ON, Canada", "lat": "45.424721", "lng": "-75.685866"},
+			"category":"Information Workshops",												
+			"detail":"This January, Omar Uddin's popular 18 hour Arabic Calligraphy workshop is coming to Ottawa! The course is designed with beginners in mind and will kick start your journey to learning thisprestigious art..."
+			},
+			{"id": "20160114_3",
+			"name": "CUMSA Sisters' Coffeehouse","start_time": "05:00pm", "end_time": "07:00pm", "image":{ 
+												"url":"img/middle-east_slider_1452052427.jpg",
+												"alt":"Canadian Policy in the Middle East with the Globe and Mail's Patrick Martin",
+												"title":"Canadian Policy in the Middle East with the Globe and Mail's Patrick Martin"
+											},
+			"location": {"name": "Carleton University", "address":"1125 Colonel By Drive, Ottawa, K1S 5B6, ON, Canada", "lat": "45.382185", "lng": "-75.697327"},
+			"category":"Social/Cultural",												
+			"detail":"DESCRIPTION: Sisters are invited to a socializing event complete with entertaining performances of poetry, stand-up comedy, and more! DATE & TIME: Jan. 15, 6:30 PM LOCATION: Roosters Coffeehouse, 4rd..."
+			}
+		]
+	},
+"2016-01-23":{
+	"badgeClass":"badge-warning", 
+	"number": 1, 
+	"dayEvents": [
+			{"id": "20160123_1",
+			"name": "Soirée entre femmes pour Gaza","start_time": "05:00pm", "end_time": "08:00pm", "image":{
+													"url":"img/soiree-femmes_slider_1452519435.jpg",
+													"alt":"Soirée entre femmes pour Gaza",
+													"title":"Soirée entre femmes pour Gaza"
+												},											 
+			"location": {"name": "Centre Communautaire Laurentien / Mosquée AlRawdah Montréal", "address":"12265 Laurentien, Montreal, H4K 1N5, QC, Canada", "lat": "45.529421", "lng": "-73.722599"},
+			"category":"Fundraising Dinners",												
+			"detail":"Le Comité Solid'ère est heureux de vous annoncer qu'une soirée bénéfice exceptionnelle pour femmes aura lieu le samedi le 23 janvier de 17h à 20h au Centre Communautaire Laurentien (12265 Boul.Laurentien,...",
+			"socialMedias":[
+					{"classType": "facebook", "url": "https://www.facebook.com/events/971405309597217/"}
+				],											
+			"fees":"$25.00",
+			"left":"unlimited",
+			"detailHtml":"<p>Le <a href=\"http://muslimlink.ca/directory/montreal/religious/local-orgs/3503-comite-solidere?city=Montreal\" target=\"_blank\">Comit&eacute; Solid&egrave;re</a> est heureux de vous annoncer qu'une soir&eacute;e b&eacute;n&eacute;fice exceptionnelle pour femmes aura lieu le samedi le 23 janvier de 17h &agrave; 20h au Centre Communautaire Laurentien (12265 Boul.Laurentien, Montr&eacute;al, H4K 1N5).<br />Une soir&eacute;e riche en &eacute;motions qui ne vous laissera pas de marbre. &Agrave; la lueur des difficult&eacute;s &eacute;prouv&eacute;es chaque jour par le peuple palestinien, nous avons d&eacute;cid&eacute; de vous organiser une soir&eacute;e pleine de surprises qui ne vous laissera pas indiff&eacute;rents. Aussi, nous vous pr&eacute;senterons en exclusivit&eacute; le projet Gaza que nous avons r&eacute;ussi &agrave; financer gr&acirc;ce aux g&eacute;n&eacute;reuses donatrices de notre premi&egrave;re &eacute;dition &laquo;Soir&eacute;e b&eacute;n&eacute;fice pour femmes pour la Palestine&raquo;<br />Un billet achet&eacute; et vous joignez l'utile &agrave; l'ag<span>r&eacute;able en contribuant &agrave; une cause noble et en passant une excellente soir&eacute;e.</span></p><p>Soyez de ceux qui contribuent &agrave; cette cause en partageant autour de vous et en invitant vos m&egrave;res, soeurs, femmes et filles ! Vous pouvez faire la diff&eacute;rence.</p><p>Vous pouvez acheter votre billet &agrave; l'avance pour 25$ seulement. Vous avez &eacute;galement la possibilit&eacute; de r&eacute;server votre billet &agrave; l'avance (vous devrez conserver le code puis payer &agrave; la porte directement).</p><p>Des billets seront disponibles &agrave; la porte pour 30$.</p><p>*AUCUN ENFANT ADMIS*</p><p>Faites vite les places sont limit&eacute;es !!<br />Joignez-vous &agrave; nous, r&eacute;servez ou achetez d&egrave;s maintenant <a href=\"http://www.comitesolidere.com/soireegaza/\" target=\"_blank\">ici</a></p><p>Cet &eacute;v&eacute;nement est sponsoris&eacute; par <a href=\"http://muslimlink.ca/directory/montreal/fashion-beauty/clothing-jewellery/3504-al-mastoura-shop?city=Montreal\" target=\"_blank\">Al Mastoura Shop</a></p><p>Connect with this event on Facebook <a href=\"https://www.facebook.com/events/971405309597217/\" target=\"_blank\">here</a></p>"
+			}
+		]
+	},
+"2016-01-24":{
+	"badgeClass":"badge-warning", 
+	"number": 1, 
+	"dayEvents": [
+			{"id": "20160125_1",
+			"name": "UOMSA Contemporary Youth Struggles","start_time": "08:00pm", "end_time": "09:00pm", "image":{
+													"url":"img/uomsa-youth_slider_1452344215.jpg",
+													"alt":"UOMSA Contemporary Youth Struggles",
+													"title":"UOMSA Contemporary Youth Struggles"
+												},											 
+			"location": {"name": "Desmarais Hall, University of Ottawa", "address":"55 Laurier East, Ottawa, K1N 1A2, ON, Canada", "lat": "45.423906", "lng": "-75.687202"},
+			"category":"Lectures",												
+			"detail":"The University of Ottawa Muslim Students Association (UOMSA) invites all students to join us on Friday January 15th for a Questions - Answers Session. The main goal of this event is to give students opportunity..."
+			}
+		]
+	},
+"2016-01-17":{
+	"badgeClass":"badge-warning", 
+	"number": 1, 
+	"dayEvents": [
+			{"id": "20160117_1",
+			"name": "Human Concern Charity Bazaar for Syria","start_time": "12:00pm", "end_time": "09:00pm", "image":{
+												 	"url":"img/money_slider_1450099191.jpg",
+													"alt":"How To Make Your Money Work For You",
+													"title":"How To Make Your Money Work For You"
+													},							 
+			"location": {"name": "Centre Communautaire Laurentien / Mosquée AlRawdah Montréal", "address":"12265 Laurentien, Montreal, H4K 1N5, QC, Canada", "lat": "45.529481", "lng": "-73.722578"},
+			"category":"Bazaars",												
+			"detail":"MEGA BAZAR FOR SYRIAN CHILDREN REFUGEES Organized by Human Concern International Save lives of Syrian children refugees under the tents from dying from cold and snow DATE & TIME: Friday , January 15th..."
+			}
+		]
+	},
+"2016-02-01":{
+	"badgeClass":"badge-warning", 
+	"number": 1, 
+	"dayEvents": [
+			{"id": "20160201_1",
+			"name": "How To Make Your Money Work For You","start_time": "09:00am", "end_time": "09:30am", "image":{
+												 	"url":"img/money_slider_1450099191.jpg",
+													"alt":"How To Make Your Money Work For You",
+													"title":"How To Make Your Money Work For You"
+													},							 
+			"location": {"name": "SNMC Centre & Masjid Site", "address":"3020 Woodroffe Avenue, Ottawa, K2J 4G3, ON, Canada", "lat": "45.289189", "lng": "-75.726530"},
+			"category":"Information Workshops",												
+			"detail":"Cash Flow: overall budgeting and planning with a focus on retirement. Presenter: Wael Tamraz, Financial Consultant Credit Cards: how they work, credit report and credit card cycle, cash flow. Presenter:..."
+			}
+		]
+	}
+}

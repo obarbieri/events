@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact Page with Single Map Modal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 
+<body>
+<form action="NewFile3.html" method="post">
+        First name: <input type="text" id="jfirstname" name="firstname" /> <br />
+        Surname: <input type="text" id="jsurname" name="surname" /><br />
+        <input type="reset" value="Clear form" />
+        <input type="submit" value="Submit now" />
+</form>
+
+    <script type="text/javascript">
+    	
+    	$(document).ready(function () {
+            	date_start = document.getElementById('jfirstname').value;
+               	date_end = document.getElementById('jsurname').value;
+               	
+               	alert('dates=' + date_start + ' ' + date_end);
+
+    	});
+    </script>
+
+</body>
+</html>
